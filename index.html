@@ -3,13 +3,27 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Stop: It's Giphy time</title>
+    <title>gifTastic: Cartoons</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css">
+
 </head>
 
 <body>
-  <div class="buttonArea">
-  </div>
-  <div class="gifArea">
-  </div>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  <script type="text/javascript">
+
+	<div id="buttonArea"></div>
+	<br>
+	<div class="form-group">
+	    <label for="newTopic">Add a Cartoon!</label>
+	    <input type = "text" class="form-control" id="newTopic">
+	</div>
+	<button type="submit" id= "submitBtn" class="btn btn-primary">Submit</button>
+
+	<div id="gifArea"></div>
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script type="text/javascript" src="../gifTastic/app.js"></script>
+
+</body>
+
+</html>
