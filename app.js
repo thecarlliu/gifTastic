@@ -16,19 +16,23 @@ function createBtns() {
             class: "gifBtn",
             text: topics[i]
         });
+        newBtn.css("margin-top", "5px");
+        newBtn.css("margin-left", "5px");
+        newBtn.css("margin-right", "5px");
+        newBtn.css("margin-bottom", "5px");
         $("#buttonArea").append(newBtn);
     }
 }
 
 //When a topics[] button is clicked, the queryURL is changed appropriately to retrieve 10 gifs of the cartoon chosen along with their ratings.
 //The gifs are then displayed.
-$(".gifBtn").on("click", function() {
+$("#buttonArea").on("click", ".gifBtn", function() {
     var topic = $(this).text();
     topic = topic.replace(" ", "+");
     topic = topic.toLowerCase();
     console.log(topic);
     var searchTerm = topic;
-    var queryURL = "https://api.giphy.com/v1/gifs/searchq?="+searchTerm+"&"+apiKey+"&limit=10";
+    var queryURL = "https://api.giphy.com/v1/gifs/search?q="+searchTerm+"&limit=10"+"&"+apiKey;
     var queryURL2 = "https://api.giphy.com/v1/gifs/trending?"+apiKey;
 
     $.ajax({
@@ -44,9 +48,9 @@ $(".gifBtn").on("click", function() {
             });
             var gif = $("<img>", {
                 class: "gifImg",
-                animate: result.data[i].images.fixed_height_small.url,
+                animated: result.data[i].images.fixed_height_small.url,
                 still: result.data[i].images.fixed_height_small_still.url,
-                dataState: "animate"
+                dataState: "still"
             });
             var rating = $("<div>", {
                 text: "Rating: "+result.data[i].rating,
@@ -65,8 +69,8 @@ $(".gifBtn").on("click", function() {
             imgBox.css("float", "left");
             imgBox.css("padding-left", "10px");
             imgBox.css("padding-right", "10px");
-            imgBox.css("padding-top", "5px");
-            imgBox.css("padding-bottom", "5px");
+            imgBox.css("padding-top", "10px");
+            imgBox.css("padding-bottom", "10px");
 
             $("#gifArea").append(imgBox);
         }
@@ -75,17 +79,23 @@ $(".gifBtn").on("click", function() {
 
 //when a gif is clicked, its state will change between "animate" and "still", using the different urls stored as attributes in the creation of each gif to either animate it or set it to be a still image.
 
-$(".gifImg").on("click", function() {
-
+$("#gifArea").on("click", ".gifImg", function() {
+    console.log("clicked");
     var state = $(this).attr("dataState");
+    var animate = $(this).attr("animated");
+    console.log(animate);
+    var still = $(this).attr("still");
+    console.log(still);
 
     if (state == "still") {
-      $(this).attr("src", $(this).attr("animate"));
+        console.log("still to animate");
+      $(this).attr("src", animate);
       $(this).attr("dataState", "animate");
     }
     else if (state == "animate") {
-      $(this).attr("src", $(this).attr("still"));
-      $(this).attr("dataState", "animate");
+        console.log("animate to still");
+      $(this).attr("src", still);
+      $(this).attr("dataState", "still");
     }
 });
 
