@@ -33,7 +33,6 @@ $("#buttonArea").on("click", ".gifBtn", function() {
     console.log(topic);
     var searchTerm = topic;
     var queryURL = "https://api.giphy.com/v1/gifs/search?q="+searchTerm+"&limit=10"+"&"+apiKey;
-    var queryURL2 = "https://api.giphy.com/v1/gifs/trending?"+apiKey;
 
     $.ajax({
         url: queryURL,
